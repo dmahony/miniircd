@@ -231,13 +231,13 @@ class Client(object):
             self.disconnect("Client quit")
             return
         if self.nickname and self.user:
-            self.reply("001 %s :Hi, welcome to IRC" % self.nickname)
-            self.reply("002 %s :Your host is %s, running version miniircd-%s"
-                       % (self.nickname, server.name, VERSION))
-            self.reply("003 %s :This server was created sometime"
-                       % self.nickname)
-            self.reply("004 %s %s miniircd-%s o o"
-                       % (self.nickname, server.name, VERSION))
+            self.reply("001 %s -" % self.nickname)
+#            self.reply("002 %s --"
+#                       % (self.nickname))
+#            self.reply("003 %s ---"
+#                       % self.nickname)
+#            self.reply("004 %s ----"
+#                       % (self.nickname))
             self.send_lusers()
             self.send_motd()
             self.__handle_command = self.__command_handler
@@ -680,7 +680,7 @@ class Client(object):
                 self.reply("372 %s :- %s" % (self.nickname, line.rstrip()))
             self.reply("376 %s :End of /MOTD command" % self.nickname)
         else:
-            self.reply("422 %s :MOTD File is missing" % self.nickname)
+            self.reply("422 %s :no MOTD" % self.nickname)
 
 
 class Server(object):
